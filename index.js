@@ -207,11 +207,12 @@ const artists = [
 
 (1) Name of the first artist (0th index) in the array
 (2) Bio of the third artist (2nd index) in the array */
-
+console.log(artists[0].name)
+console.log(artists[2].bio)
 
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
-
+console.log(artists[8].name.replace("Dough","Gogh"))
 
 
 /* Task 3: Create a function called `getArtistByIndex` that takes two arguments:
@@ -223,20 +224,44 @@ const artists = [
  * it will return `The artist at index 0 is Amedeo Modigliani`.
 */
 function getArtistByIndex(array, index) {
-    /* code here */
+  return "The artist at index " + index + " is " + artists[index].name + "."
   }
-  
+  console.log(getArtistByIndex(artists,0))
   /**
 
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who lived in the 20th century (1900-2000) */
 
-function get20s(/* Code here */){
-
-  /* Code here */
-
+function returnYearsAsIntegers(years) {
+  var stringYears = years.split(" - ");
+  console.log(stringYears);
+  let birthYear = Number(stringYears[0]);
+  let deathYear = Number(stringYears[1]);
+  let yearsAsIntegers = [];
+  yearsAsIntegers.push(deathYear)
+  yearsAsIntegers.push(birthYear)
+  return yearsAsIntegers
 }
-
+function get20s(artists){
+  var twentiethCenturyNames = [];
+    for (i=0; i < artists.length; i++){
+      var stringYears = artists[i].years;
+      let years = returnYearsAsIntegers(stringYears); 
+      var wasAlive1900s = false;
+      if (years[0] >= 1900){
+        wasAlive1900s = true;
+      } 
+      if (years[1] < 2000 && years[1] >= 1990){
+        wasAlive1900s = true;
+      } 
+      if (wasAlive1900s === true){
+        twentiethCenturyNames.push(artists[i].name)
+      }
+    }
+  return twentiethCenturyNames
+}
+let a = get20s(artists)
+console.log(a)
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -248,14 +273,28 @@ function get20s(/* Code here */){
  * 
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.  
 */
-function removeArtist(/*code here*/) {
-    /* code here */
+function removeArtist(artists,number) {
+    return artists.splice(number,1)
   }
-  
+  removeArtist(artists,0)
+  removeArtist(artists,0)
+  console.log(artists.length)
   /**
+var meals = ['breakfast', 'lunch', 'dinner'];
 
+meals.splice(1, 1);
+// ['lunch']
 
+meals;
+// ['breakfast', 'dinner']
 
+var meals = ['breakfast', 'lunch', 'dinner'];
+
+meals.splice(1, 1);
+// ['lunch']
+
+meals;
+// ['breakfast', 'dinner']
 
 /* Task 6: Create a function called `addArtist` that can accept an array of information and add it to the artists array. Then, add a 21st artist to the array (you) with custom information!👩‍🎨👨‍🎨
 
@@ -269,11 +308,22 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should console.log() the new array with information added"*/
 
-function addArtist(/* Code here */){
+function addArtist(infoPersonArray){
 
-    /* Code here */
+  infoPersonObject = {}
+  infoPersonObject.id = infoPersonArray[0]
+  infoPersonObject.name = infoPersonArray[1]
+  infoPersonObject.years = infoPersonArray[2]
+  infoPersonObject.genre = infoPersonArray[3]
+  infoPersonObject.nationality = infoPersonArray[4]
+  infoPersonObject.bio = infoPersonArray[5]
+  artists.push(infoPersonObject)
+}
 
-  }
+let infoColeah = [21,"Coleah", "1990-Present", "web design", "United States", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." ]
+
+addArtist(infoColeah)
+console.log(artists)
 
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
@@ -283,11 +333,16 @@ and returns an array with names of artists who painted more than 100 paintings.
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
-function lotsOfArt(/* Code here */){
-
-  /* Code here */
-
-}
+function lotsOfArt(artists){
+  var hundredPaintings = [];
+  for (i=0; i < artists.length; i++){
+    if (artists[i].paintings <= 100) {
+      hundredPaintings.push(artists[i].name)
+    }
+  }
+  return hundredPaintings
+  }
+console.log(lotsOfArt(artists))
 
 
 
